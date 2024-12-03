@@ -1,0 +1,38 @@
+aid: capital-com-public-api
+name: Capital.com Public API
+description: >-
+  Financial accounts accountId is the ID of your financial account. Each
+  financial account has its unique ID. To view the full list of the available
+  financial accounts, use the GET /accounts endpoint. To find out which
+  financial account is used for trading operations in the API please go to the
+  GET /session endpoint. To change the financial account use: PUT /session.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - API
+created: '2024-12-03'
+modified: '2024-12-03'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/capital-com-public-api/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - aid: capital-com-public-api:capital-com-public-api
+    name: Capital.com Public API
+    description: >-
+      Financial accounts accountId is the ID of your financial account. Each
+      financial account has its unique ID. To view the full list of the
+      available financial accounts, use the GET /accounts endpoint. To find out
+      which financial account is used for trading operations in the API please
+      go to the GET /session endpoint. To change the financial account use: PUT
+      /session.
+    humanURL: https://open-api.capital.com
+    tags:
+      - API
+    properties:
+      - type: Documentation
+        url: https://open-api.capital.com
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
