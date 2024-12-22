@@ -17,7 +17,7 @@ Capital.com is one of Europes fastest-growing trading platforms, with offices a
 ## Timestamps
 
 - **Created:** 2024-12-03 
-- **Modified:** 2024-12-15 
+- **Modified:** 2024-12-22 
 
 ## APIs
 
@@ -25,6 +25,7 @@ Capital.com is one of Europes fastest-growing trading platforms, with offices a
 Financial accounts accountId is the ID of your financial account. Each financial account has its unique ID. To view the full list of the available financial accounts, use the GET /accounts endpoint. To find out which financial account is used for trading operations in the API please go to the GET /session endpoint. To change the financial account use: PUT /session.
 
 **Human URL:** [https://open-api.capital.com](https://open-api.capital.com)
+r
 
 #### Tags
 
