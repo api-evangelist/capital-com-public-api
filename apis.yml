@@ -3,9 +3,9 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/capital-com-public-api/refs/heads/main/apis.yml
 name: Capital.com Public API
 tags:
+  - CFD
   - Financial
   - Trading
-  - CFD
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
