@@ -56,6 +56,8 @@ apis:
         url: https://demo-api-capital.backend-capital.com/
       - type: Authentication
         url: https://open-api.capital.com
+      - type: OpenAPI
+        url: openapi/capital-com-public-api-capital-com-rest-api-openapi.yml
     x-features:
       - Session-based authentication with CST and X-SECURITY-TOKEN
       - API key plus login credentials to create sessions
