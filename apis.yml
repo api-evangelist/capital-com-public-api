@@ -11,7 +11,7 @@ description: >-
   market data. A companion WebSocket API streams real-time prices and
   OHLC candles for up to 40 concurrent instruments.
 type: Index
-x-type: company
+kind: company
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
@@ -113,9 +113,9 @@ common:
     url: https://open-api.capital.com
   - type: Sandbox
     url: https://demo-api-capital.backend-capital.com/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://capital.com/privacy-policy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://capital.com/terms-and-conditions
   - type: Support
     url: https://capital.com/help
