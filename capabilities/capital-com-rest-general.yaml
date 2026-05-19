@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Capital.com REST API
+  description: 'Capital.com REST API. 2 operations. Lead operation: Ping the Service. Self-contained Naftiko capability covering
+    one Capital Com Public Api business surface.'
+  tags:
+  - Capital Com Public Api
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CAPITAL_COM_PUBLIC_API_API_KEY: CAPITAL_COM_PUBLIC_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: capital-com-rest-general
+    baseUri: https://api-capital.backend-capital.com
+    description: Capital.com REST API business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-ping
+      path: /api/v1/ping
+      operations:
+      - name: ping
+        method: GET
+        description: Ping the Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-time
+      path: /api/v1/time
+      operations:
+      - name: getservertime
+        method: GET
+        description: Get Server Time
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-CAP-API-KEY
+      value: '{{env.CAPITAL_COM_PUBLIC_API_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: capital-com-rest-general-rest
+    port: 8080
+    description: REST adapter for Capital.com REST API. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/v1/ping
+      name: api-v1-ping
+      description: REST surface for api-v1-ping.
+      operations:
+      - method: GET
+        name: ping
+        description: Ping the Service
+        call: capital-com-rest-general.ping
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/time
+      name: api-v1-time
+      description: REST surface for api-v1-time.
+      operations:
+      - method: GET
+        name: getservertime
+        description: Get Server Time
+        call: capital-com-rest-general.getservertime
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: capital-com-rest-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Capital.com REST API. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: ping-service
+      description: Ping the Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-general.ping
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-server-time
+      description: Get Server Time
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-general.getservertime
+      outputParameters:
+      - type: object
+        mapping: $.

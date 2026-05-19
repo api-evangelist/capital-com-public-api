@@ -1,0 +1,188 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Capital.com REST API — Markets
+  description: 'Capital.com REST API — Markets. 4 operations. Lead operation: List Top-Level Market Categories. Self-contained
+    Naftiko capability covering one Capital Com Public Api business surface.'
+  tags:
+  - Capital Com Public Api
+  - Markets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CAPITAL_COM_PUBLIC_API_API_KEY: CAPITAL_COM_PUBLIC_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: capital-com-rest-markets
+    baseUri: https://api-capital.backend-capital.com
+    description: Capital.com REST API — Markets business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-marketnavigation
+      path: /api/v1/marketnavigation
+      operations:
+      - name: listmarketnavigation
+        method: GET
+        description: List Top-Level Market Categories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-marketnavigation-nodeId
+      path: /api/v1/marketnavigation/{nodeId}
+      operations:
+      - name: listmarketnavigationbynode
+        method: GET
+        description: List Sub-Nodes for Category
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nodeId
+          in: path
+          type: string
+          description: The navigation node identifier.
+          required: true
+    - name: api-v1-markets
+      path: /api/v1/markets
+      operations:
+      - name: listmarkets
+        method: GET
+        description: List Markets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-markets-epic
+      path: /api/v1/markets/{epic}
+      operations:
+      - name: getmarket
+        method: GET
+        description: Get Single Market
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: epic
+          in: path
+          type: string
+          description: Market epic (instrument identifier).
+          required: true
+    authentication:
+      type: apikey
+      key: X-CAP-API-KEY
+      value: '{{env.CAPITAL_COM_PUBLIC_API_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: capital-com-rest-markets-rest
+    port: 8080
+    description: REST adapter for Capital.com REST API — Markets. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/marketnavigation
+      name: api-v1-marketnavigation
+      description: REST surface for api-v1-marketnavigation.
+      operations:
+      - method: GET
+        name: listmarketnavigation
+        description: List Top-Level Market Categories
+        call: capital-com-rest-markets.listmarketnavigation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/marketnavigation/{nodeid}
+      name: api-v1-marketnavigation-nodeid
+      description: REST surface for api-v1-marketnavigation-nodeId.
+      operations:
+      - method: GET
+        name: listmarketnavigationbynode
+        description: List Sub-Nodes for Category
+        call: capital-com-rest-markets.listmarketnavigationbynode
+        with:
+          nodeId: rest.nodeId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/markets
+      name: api-v1-markets
+      description: REST surface for api-v1-markets.
+      operations:
+      - method: GET
+        name: listmarkets
+        description: List Markets
+        call: capital-com-rest-markets.listmarkets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/markets/{epic}
+      name: api-v1-markets-epic
+      description: REST surface for api-v1-markets-epic.
+      operations:
+      - method: GET
+        name: getmarket
+        description: Get Single Market
+        call: capital-com-rest-markets.getmarket
+        with:
+          epic: rest.epic
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: capital-com-rest-markets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Capital.com REST API — Markets. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-top-level-market-categories
+      description: List Top-Level Market Categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-markets.listmarketnavigation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-sub-nodes-category
+      description: List Sub-Nodes for Category
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-markets.listmarketnavigationbynode
+      with:
+        nodeId: tools.nodeId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-markets
+      description: List Markets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-markets.listmarkets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-market
+      description: Get Single Market
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-markets.getmarket
+      with:
+        epic: tools.epic
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,191 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Capital.com REST API — Working Orders
+  description: 'Capital.com REST API — Working Orders. 4 operations. Lead operation: List Working Orders. Self-contained Naftiko
+    capability covering one Capital Com Public Api business surface.'
+  tags:
+  - Capital Com Public Api
+  - Working Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CAPITAL_COM_PUBLIC_API_API_KEY: CAPITAL_COM_PUBLIC_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: capital-com-rest-working-orders
+    baseUri: https://api-capital.backend-capital.com
+    description: Capital.com REST API — Working Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-workingorders
+      path: /api/v1/workingorders
+      operations:
+      - name: listworkingorders
+        method: GET
+        description: List Working Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createworkingorder
+        method: POST
+        description: Create Working Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-workingorders-dealId
+      path: /api/v1/workingorders/{dealId}
+      operations:
+      - name: updateworkingorder
+        method: PUT
+        description: Update Working Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dealId
+          in: path
+          type: string
+          description: The deal ID for the working order.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteworkingorder
+        method: DELETE
+        description: Delete Working Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dealId
+          in: path
+          type: string
+          description: The deal ID for the working order.
+          required: true
+    authentication:
+      type: apikey
+      key: X-CAP-API-KEY
+      value: '{{env.CAPITAL_COM_PUBLIC_API_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: capital-com-rest-working-orders-rest
+    port: 8080
+    description: REST adapter for Capital.com REST API — Working Orders. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/workingorders
+      name: api-v1-workingorders
+      description: REST surface for api-v1-workingorders.
+      operations:
+      - method: GET
+        name: listworkingorders
+        description: List Working Orders
+        call: capital-com-rest-working-orders.listworkingorders
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createworkingorder
+        description: Create Working Order
+        call: capital-com-rest-working-orders.createworkingorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/workingorders/{dealid}
+      name: api-v1-workingorders-dealid
+      description: REST surface for api-v1-workingorders-dealId.
+      operations:
+      - method: PUT
+        name: updateworkingorder
+        description: Update Working Order
+        call: capital-com-rest-working-orders.updateworkingorder
+        with:
+          dealId: rest.dealId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteworkingorder
+        description: Delete Working Order
+        call: capital-com-rest-working-orders.deleteworkingorder
+        with:
+          dealId: rest.dealId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: capital-com-rest-working-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Capital.com REST API — Working Orders. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-working-orders
+      description: List Working Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-working-orders.listworkingorders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-working-order
+      description: Create Working Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: capital-com-rest-working-orders.createworkingorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-working-order
+      description: Update Working Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: capital-com-rest-working-orders.updateworkingorder
+      with:
+        dealId: tools.dealId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-working-order
+      description: Delete Working Order
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: capital-com-rest-working-orders.deleteworkingorder
+      with:
+        dealId: tools.dealId
+      outputParameters:
+      - type: object
+        mapping: $.
