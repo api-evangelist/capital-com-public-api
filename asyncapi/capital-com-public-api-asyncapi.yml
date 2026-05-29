@@ -1,0 +1,469 @@
+asyncapi: '2.6.0'
+info:
+  title: Capital.com WebSocket Streaming API
+  version: '1.0.0'
+  description: |
+    Real-time streaming API from Capital.com for market data and OHLC candlestick updates.
+    Clients connect over WebSocket using session tokens (CST and X-SECURITY-TOKEN) obtained
+    from the Capital.com REST API. A single connection supports up to 40 concurrent instrument
+    subscriptions and must be pinged at least once every 10 minutes to remain active.
+  contact:
+    name: Capital.com API Support
+    url: https://open-api.capital.com
+  termsOfService: https://capital.com/terms-and-conditions
+  license:
+    name: Capital.com Terms of Service
+    url: https://capital.com/terms-and-conditions
+
+servers:
+  production:
+    url: api-streaming-capital.backend-capital.com/connect
+    protocol: wss
+    description: Capital.com production WebSocket streaming endpoint.
+  demo:
+    url: demo-api-streaming-capital.backend-capital.com/connect
+    protocol: wss
+    description: Capital.com demo WebSocket streaming endpoint.
+
+defaultContentType: application/json
+
+channels:
+  /:
+    description: |
+      Single WebSocket channel for all destinations. Clients send frames whose `destination`
+      field selects an operation (marketData.subscribe, marketData.unsubscribe,
+      OHLCMarketData.subscribe, OHLCMarketData.unsubscribe, ping). The server publishes
+      subscription confirmations, market data updates, OHLC bar updates, and ping responses
+      on the same connection.
+    publish:
+      operationId: sendClientFrame
+      summary: Frames sent from the client to Capital.com.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/MarketDataSubscribe'
+          - $ref: '#/components/messages/MarketDataUnsubscribe'
+          - $ref: '#/components/messages/OHLCMarketDataSubscribe'
+          - $ref: '#/components/messages/OHLCMarketDataUnsubscribe'
+          - $ref: '#/components/messages/Ping'
+    subscribe:
+      operationId: receiveServerFrame
+      summary: Frames received from Capital.com.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SubscriptionStatus'
+          - $ref: '#/components/messages/MarketDataUpdate'
+          - $ref: '#/components/messages/OHLCMarketDataUpdate'
+          - $ref: '#/components/messages/PingResponse'
+
+components:
+  messages:
+    MarketDataSubscribe:
+      name: marketDataSubscribe
+      title: Subscribe to real-time market data
+      summary: Subscribe to live bid/offer price updates for a set of instrument epics.
+      payload:
+        $ref: '#/components/schemas/MarketDataSubscribeFrame'
+
+    MarketDataUnsubscribe:
+      name: marketDataUnsubscribe
+      title: Unsubscribe from real-time market data
+      summary: Remove real-time price subscriptions for one or more epics.
+      payload:
+        $ref: '#/components/schemas/MarketDataUnsubscribeFrame'
+
+    OHLCMarketDataSubscribe:
+      name: ohlcMarketDataSubscribe
+      title: Subscribe to OHLC candlestick updates
+      summary: Subscribe to OHLC candle updates for a set of epics, resolutions, and bar type.
+      payload:
+        $ref: '#/components/schemas/OHLCMarketDataSubscribeFrame'
+
+    OHLCMarketDataUnsubscribe:
+      name: ohlcMarketDataUnsubscribe
+      title: Unsubscribe from OHLC candlestick updates
+      summary: Remove OHLC subscriptions for the given epics, with optional resolution and type filters.
+      payload:
+        $ref: '#/components/schemas/OHLCMarketDataUnsubscribeFrame'
+
+    Ping:
+      name: ping
+      title: Ping the streaming session
+      summary: Keep the WebSocket session alive (must be sent at least every 10 minutes).
+      payload:
+        $ref: '#/components/schemas/PingFrame'
+
+    SubscriptionStatus:
+      name: subscriptionStatus
+      title: Subscription processing status
+      summary: Confirms processing status of a subscribe or unsubscribe request per epic.
+      payload:
+        $ref: '#/components/schemas/SubscriptionStatusFrame'
+
+    MarketDataUpdate:
+      name: marketDataUpdate
+      title: Real-time market data update
+      summary: Streaming bid/offer quote update for a subscribed instrument.
+      payload:
+        $ref: '#/components/schemas/MarketDataUpdateFrame'
+
+    OHLCMarketDataUpdate:
+      name: ohlcMarketDataUpdate
+      title: OHLC candlestick update
+      summary: Streaming OHLC bar update for a subscribed instrument and resolution.
+      payload:
+        $ref: '#/components/schemas/OHLCMarketDataUpdateFrame'
+
+    PingResponse:
+      name: pingResponse
+      title: Ping response
+      summary: Server acknowledgement of a client ping.
+      payload:
+        $ref: '#/components/schemas/PingResponseFrame'
+
+  schemas:
+    MarketDataSubscribeFrame:
+      type: object
+      required:
+        - destination
+        - correlationId
+        - cst
+        - securityToken
+        - payload
+      properties:
+        destination:
+          type: string
+          enum:
+            - marketData.subscribe
+        correlationId:
+          type: string
+          description: Client-generated id to correlate request and response frames.
+          example: '1'
+        cst:
+          type: string
+          description: CST access token from a REST API session.
+        securityToken:
+          type: string
+          description: X-SECURITY-TOKEN account identifier from a REST API session.
+        payload:
+          type: object
+          required:
+            - epics
+          properties:
+            epics:
+              type: array
+              description: List of instrument epics to subscribe to (up to 40 concurrent).
+              maxItems: 40
+              items:
+                type: string
+              example:
+                - OIL_CRUDE
+                - AAPL
+
+    MarketDataUnsubscribeFrame:
+      type: object
+      required:
+        - destination
+        - correlationId
+        - cst
+        - securityToken
+        - payload
+      properties:
+        destination:
+          type: string
+          enum:
+            - marketData.unsubscribe
+        correlationId:
+          type: string
+          example: '2'
+        cst:
+          type: string
+        securityToken:
+          type: string
+        payload:
+          type: object
+          required:
+            - epics
+          properties:
+            epics:
+              type: array
+              items:
+                type: string
+              example:
+                - OIL_CRUDE
+
+    OHLCMarketDataSubscribeFrame:
+      type: object
+      required:
+        - destination
+        - correlationId
+        - cst
+        - securityToken
+        - payload
+      properties:
+        destination:
+          type: string
+          enum:
+            - OHLCMarketData.subscribe
+        correlationId:
+          type: string
+          example: '3'
+        cst:
+          type: string
+        securityToken:
+          type: string
+        payload:
+          type: object
+          required:
+            - epics
+          properties:
+            epics:
+              type: array
+              description: Up to 40 instrument epics.
+              maxItems: 40
+              items:
+                type: string
+              example:
+                - AAPL
+            resolutions:
+              type: array
+              description: Candle timeframes to subscribe to. Defaults to MINUTE.
+              items:
+                type: string
+                enum:
+                  - MINUTE
+                  - MINUTE_5
+                  - MINUTE_15
+                  - MINUTE_30
+                  - HOUR
+                  - HOUR_4
+                  - DAY
+                  - WEEK
+              example:
+                - MINUTE_5
+            type:
+              type: string
+              description: Candle bar format. Defaults to classic.
+              enum:
+                - classic
+                - heikin-ashi
+              default: classic
+
+    OHLCMarketDataUnsubscribeFrame:
+      type: object
+      required:
+        - destination
+        - correlationId
+        - cst
+        - securityToken
+        - payload
+      properties:
+        destination:
+          type: string
+          enum:
+            - OHLCMarketData.unsubscribe
+        correlationId:
+          type: string
+          example: '4'
+        cst:
+          type: string
+        securityToken:
+          type: string
+        payload:
+          type: object
+          required:
+            - epics
+          properties:
+            epics:
+              type: array
+              items:
+                type: string
+              example:
+                - AAPL
+            resolutions:
+              type: array
+              description: Optional resolutions to unsubscribe from. Defaults to all.
+              items:
+                type: string
+                enum:
+                  - MINUTE
+                  - MINUTE_5
+                  - MINUTE_15
+                  - MINUTE_30
+                  - HOUR
+                  - HOUR_4
+                  - DAY
+                  - WEEK
+            types:
+              type: array
+              description: Optional candle types to unsubscribe from. Defaults to all.
+              items:
+                type: string
+                enum:
+                  - classic
+                  - heikin-ashi
+
+    PingFrame:
+      type: object
+      required:
+        - destination
+        - correlationId
+        - cst
+        - securityToken
+      properties:
+        destination:
+          type: string
+          enum:
+            - ping
+        correlationId:
+          type: string
+          example: '5'
+        cst:
+          type: string
+        securityToken:
+          type: string
+
+    SubscriptionStatusFrame:
+      type: object
+      description: |
+        Frame returned in response to marketData.subscribe, marketData.unsubscribe,
+        OHLCMarketData.subscribe, or OHLCMarketData.unsubscribe.
+      properties:
+        status:
+          type: string
+          description: Overall status of the request (for example, OK).
+          example: OK
+        destination:
+          type: string
+          example: marketData.subscribe
+        correlationId:
+          type: string
+          example: '1'
+        payload:
+          type: object
+          properties:
+            subscriptions:
+              type: object
+              additionalProperties:
+                type: string
+                description: Per-epic subscription processing status (for example, PROCESSED).
+                example: PROCESSED
+
+    MarketDataUpdateFrame:
+      type: object
+      description: Streaming market data quote frame.
+      properties:
+        status:
+          type: string
+          example: OK
+        destination:
+          type: string
+          enum:
+            - quote
+        payload:
+          type: object
+          properties:
+            epic:
+              type: string
+              description: Instrument identifier.
+              example: OIL_CRUDE
+            product:
+              type: string
+              description: Instrument category (for example, CFD).
+              example: CFD
+            bid:
+              type: number
+              format: double
+              description: Current bid price.
+            bidQty:
+              type: number
+              format: double
+              description: Quantity available at the current bid.
+            ofr:
+              type: number
+              format: double
+              description: Current offer (ask) price.
+            ofrQty:
+              type: number
+              format: double
+              description: Quantity available at the current offer.
+            timestamp:
+              type: integer
+              format: int64
+              description: Update timestamp in milliseconds since epoch.
+
+    OHLCMarketDataUpdateFrame:
+      type: object
+      description: Streaming OHLC candle update frame.
+      properties:
+        status:
+          type: string
+          example: OK
+        destination:
+          type: string
+          enum:
+            - ohlc.event
+        payload:
+          type: object
+          properties:
+            epic:
+              type: string
+              example: AAPL
+            resolution:
+              type: string
+              enum:
+                - MINUTE
+                - MINUTE_5
+                - MINUTE_15
+                - MINUTE_30
+                - HOUR
+                - HOUR_4
+                - DAY
+                - WEEK
+            type:
+              type: string
+              enum:
+                - classic
+                - heikin-ashi
+            priceType:
+              type: string
+              description: Price basis used to build the candle.
+              enum:
+                - bid
+                - ask
+            t:
+              type: integer
+              format: int64
+              description: Bar timestamp in milliseconds since epoch.
+            o:
+              type: number
+              format: double
+              description: Opening price of the bar.
+            h:
+              type: number
+              format: double
+              description: Highest price of the bar.
+            l:
+              type: number
+              format: double
+              description: Lowest price of the bar.
+            c:
+              type: number
+              format: double
+              description: Closing price of the bar.
+
+    PingResponseFrame:
+      type: object
+      properties:
+        status:
+          type: string
+          example: OK
+        destination:
+          type: string
+          enum:
+            - ping
+        correlationId:
+          type: string
+          example: '5'
+        payload:
+          type: object
+          description: Empty payload.

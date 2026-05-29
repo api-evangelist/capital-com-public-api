@@ -23,7 +23,7 @@ tags:
   - Trading
   - WebSocket
 created: '2024-12-03'
-modified: '2026-05-19'
+modified: '2026-05-29'
 specificationVersion: '0.19'
 apis:
   - aid: capital-com-public-api:capital-com-rest-api
@@ -100,6 +100,8 @@ apis:
     properties:
     - type: Documentation
       url: https://open-api.capital.com
+    - type: AsyncAPI
+      url: asyncapi/capital-com-public-api-asyncapi.yml
     x-features:
     - Real-time price streaming via WebSocket
     - Up to 40 concurrent instrument subscriptions
