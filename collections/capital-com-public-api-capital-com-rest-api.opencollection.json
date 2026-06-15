@@ -1,0 +1,467 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Capital.com REST API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CAP-API-KEY",
+      "value": "{{X-CAP-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "General",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/time"
+          },
+          "docs": "Returns the current Capital.com server time."
+        },
+        {
+          "info": {
+            "name": "Ping the Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/ping"
+          },
+          "docs": "Returns a simple OK response to verify connectivity."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Encryption Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/session/encryptionKey"
+          },
+          "docs": "Returns the public encryption key used to encrypt the session password."
+        },
+        {
+          "info": {
+            "name": "Get Session Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/session"
+          },
+          "docs": "Returns details of the currently active API session."
+        },
+        {
+          "info": {
+            "name": "Create New Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-capital.backend-capital.com/api/v1/session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates with API key and login credentials to create a new session."
+        },
+        {
+          "info": {
+            "name": "Switch Active Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-capital.backend-capital.com/api/v1/session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Switches the active account associated with the current session."
+        },
+        {
+          "info": {
+            "name": "Log Out Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-capital.backend-capital.com/api/v1/session"
+          },
+          "docs": "Terminates the current API session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts"
+          },
+          "docs": "Returns all accounts available to the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Get Account Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts/preferences"
+          },
+          "docs": "Returns account preferences, including leverage and hedging mode."
+        },
+        {
+          "info": {
+            "name": "Update Account Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts/preferences",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates account preferences such as leverage or hedging mode."
+        },
+        {
+          "info": {
+            "name": "Adjust Demo Account Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts/topUp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adjusts the balance of a demo account for testing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Activity History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/history/activity"
+          },
+          "docs": "Returns the account activity history."
+        },
+        {
+          "info": {
+            "name": "Get Transactions History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/history/transactions"
+          },
+          "docs": "Returns the account transactions history."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Deal Confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/confirms/:dealReference",
+            "params": [
+              {
+                "name": "dealReference",
+                "value": "",
+                "type": "path",
+                "description": "The deal reference identifier."
+              }
+            ]
+          },
+          "docs": "Returns the position or order confirmation for a given deal reference."
+        },
+        {
+          "info": {
+            "name": "List All Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/positions"
+          },
+          "docs": "Returns all open positions for the active account."
+        },
+        {
+          "info": {
+            "name": "Create Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-capital.backend-capital.com/api/v1/positions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Opens a new trading position."
+        },
+        {
+          "info": {
+            "name": "Get Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/positions/:dealId",
+            "params": [
+              {
+                "name": "dealId",
+                "value": "",
+                "type": "path",
+                "description": "The deal ID for the position."
+              }
+            ]
+          },
+          "docs": "Returns details for a single open position."
+        },
+        {
+          "info": {
+            "name": "Update Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-capital.backend-capital.com/api/v1/positions/:dealId",
+            "params": [
+              {
+                "name": "dealId",
+                "value": "",
+                "type": "path",
+                "description": "The deal ID for the position."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing position (e.g., stops, limits)."
+        },
+        {
+          "info": {
+            "name": "Close Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-capital.backend-capital.com/api/v1/positions/:dealId",
+            "params": [
+              {
+                "name": "dealId",
+                "value": "",
+                "type": "path",
+                "description": "The deal ID for the position to close."
+              }
+            ]
+          },
+          "docs": "Closes the specified open position."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Working Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Working Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders"
+          },
+          "docs": "Returns all working (limit/stop) orders for the active account."
+        },
+        {
+          "info": {
+            "name": "Create Working Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new working order (limit or stop)."
+        },
+        {
+          "info": {
+            "name": "Update Working Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders/:dealId",
+            "params": [
+              {
+                "name": "dealId",
+                "value": "",
+                "type": "path",
+                "description": "The deal ID for the working order."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing working order."
+        },
+        {
+          "info": {
+            "name": "Delete Working Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders/:dealId",
+            "params": [
+              {
+                "name": "dealId",
+                "value": "",
+                "type": "path",
+                "description": "The deal ID for the working order."
+              }
+            ]
+          },
+          "docs": "Cancels and deletes the specified working order."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Markets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Top-Level Market Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/marketnavigation"
+          },
+          "docs": "Returns the top-level market navigation categories."
+        },
+        {
+          "info": {
+            "name": "List Sub-Nodes for Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/marketnavigation/:nodeId",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path",
+                "description": "The navigation node identifier."
+              }
+            ]
+          },
+          "docs": "Returns the sub-nodes (markets and child categories) under a given navigation node."
+        },
+        {
+          "info": {
+            "name": "List Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/markets"
+          },
+          "docs": "Returns details for a set of markets, filtered by query parameters."
+        },
+        {
+          "info": {
+            "name": "Get Single Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/markets/:epic",
+            "params": [
+              {
+                "name": "epic",
+                "value": "",
+                "type": "path",
+                "description": "Market epic (instrument identifier)."
+              }
+            ]
+          },
+          "docs": "Returns details for a single market, identified by its epic."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
