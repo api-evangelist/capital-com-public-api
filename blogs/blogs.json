@@ -2,20 +2,13 @@
   "repo": "capital-com-public-api",
   "feeds": [
     {
-      "source": "https://capital.com/en-int/analysis",
-      "feed_url": "https://capital.com/en-int/analysis",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://capital.com/help",
-      "feed_url": "https://capital.com/help",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "source": "https://capital.com/news-and-analysis",
+      "feed_url": "",
+      "saved": 8,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 9,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 24,
+  "fetched": "2026-06-27T12:30:20Z",
+  "agent_pulled": "2026-06-27"
 }
