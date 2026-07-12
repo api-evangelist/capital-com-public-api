@@ -102,6 +102,12 @@ apis:
       - Real-time market dashboards
       - Streaming-data backtesting and replay
 common:
+  - type: VulnerabilityDisclosure
+    url: security/capital-com-public-api-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/capital-com-public-api-domain-security.yml
+  - type: Authentication
+    url: authentication/capital-com-public-api-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/capital-com-sv
   - type: LinkedIn

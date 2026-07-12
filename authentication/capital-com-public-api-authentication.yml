@@ -1,0 +1,30 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/capital-com-public-api-capital-com-rest-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: X-CAP-API-KEY
+  description: Capital.com API key required for all calls.
+  sources:
+  - openapi/capital-com-public-api-capital-com-rest-api-openapi.yml
+- name: sessionToken
+  type: apiKey
+  in: header
+  parameter: CST
+  description: Client session token returned after creating a session.
+  sources:
+  - openapi/capital-com-public-api-capital-com-rest-api-openapi.yml
+- name: securityToken
+  type: apiKey
+  in: header
+  parameter: X-SECURITY-TOKEN
+  description: Security token returned after creating a session.
+  sources:
+  - openapi/capital-com-public-api-capital-com-rest-api-openapi.yml
