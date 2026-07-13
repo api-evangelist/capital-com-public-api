@@ -2,13 +2,13 @@
   "repo": "capital-com-public-api",
   "feeds": [
     {
-      "source": "https://capital.com/news-and-analysis",
-      "feed_url": "",
-      "saved": 8,
-      "method": "agent-scrape"
+      "source": "https://capital.com/help",
+      "feed_url": "https://capital.com/help",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 24,
-  "fetched": "2026-06-27T12:30:20Z",
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z"
 }
