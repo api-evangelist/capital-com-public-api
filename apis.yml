@@ -102,6 +102,8 @@ apis:
       - Real-time market dashboards
       - Streaming-data backtesting and replay
 common:
+  - type: AgenticAccess
+    url: agentic-access/capital-com-public-api-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/capital-com-public-api-vulnerability-disclosure.yml
   - type: DomainSecurity
