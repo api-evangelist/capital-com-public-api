@@ -1,0 +1,136 @@
+openapi: 3.1.0
+info:
+  title: Capital.com REST Accounts Markets API
+  description: The Capital.com REST API provides programmatic access to the Capital.com trading engine, including positions, working orders, deal confirmations, account information, account switching, transaction history, account preferences (leverage, hedging mode), market navigation, instruments, and historical price data. Authentication uses an API key plus login credentials to create a session that returns CST and X-SECURITY-TOKEN headers, which expire after ten minutes of inactivity.
+  version: v1
+  contact:
+    name: Capital.com API Support
+    url: https://open-api.capital.com
+servers:
+- url: https://api-capital.backend-capital.com
+  description: Capital.com production REST API server
+- url: https://demo-api-capital.backend-capital.com
+  description: Capital.com demo (sandbox) REST API server
+security:
+- apiKey: []
+  sessionToken: []
+  securityToken: []
+tags:
+- name: Markets
+  description: Market navigation and instrument lookup.
+paths:
+  /api/v1/marketnavigation:
+    get:
+      operationId: listMarketNavigation
+      summary: List Top-Level Market Categories
+      description: Returns the top-level market navigation categories.
+      tags:
+      - Markets
+      responses:
+        '200':
+          description: A list of top-level market categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+  /api/v1/marketnavigation/{nodeId}:
+    get:
+      operationId: listMarketNavigationByNode
+      summary: List Sub-Nodes for Category
+      description: Returns the sub-nodes (markets and child categories) under a given navigation node.
+      tags:
+      - Markets
+      parameters:
+      - name: nodeId
+        in: path
+        required: true
+        description: The navigation node identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of sub-nodes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+  /api/v1/markets:
+    get:
+      operationId: listMarkets
+      summary: List Markets
+      description: Returns details for a set of markets, filtered by query parameters.
+      tags:
+      - Markets
+      responses:
+        '200':
+          description: A list of market details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+  /api/v1/markets/{epic}:
+    get:
+      operationId: getMarket
+      summary: Get Single Market
+      description: Returns details for a single market, identified by its epic.
+      tags:
+      - Markets
+      parameters:
+      - name: epic
+        in: path
+        required: true
+        description: Market epic (instrument identifier).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Market details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    GenericObject:
+      type: object
+      description: Generic JSON object response.
+      additionalProperties: true
+    Error:
+      type: object
+      description: Generic error response.
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-CAP-API-KEY
+      description: Capital.com API key required for all calls.
+    sessionToken:
+      type: apiKey
+      in: header
+      name: CST
+      description: Client session token returned after creating a session.
+    securityToken:
+      type: apiKey
+      in: header
+      name: X-SECURITY-TOKEN
+      description: Security token returned after creating a session.
+externalDocs:
+  description: Capital.com Public API Documentation
+  url: https://open-api.capital.com
+x-generated-from: https://open-api.capital.com
+x-generated-by: claude-crawl-2026-05-08

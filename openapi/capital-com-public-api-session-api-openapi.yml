@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: Capital.com REST Accounts Session API
+  description: The Capital.com REST API provides programmatic access to the Capital.com trading engine, including positions, working orders, deal confirmations, account information, account switching, transaction history, account preferences (leverage, hedging mode), market navigation, instruments, and historical price data. Authentication uses an API key plus login credentials to create a session that returns CST and X-SECURITY-TOKEN headers, which expire after ten minutes of inactivity.
+  version: v1
+  contact:
+    name: Capital.com API Support
+    url: https://open-api.capital.com
+servers:
+- url: https://api-capital.backend-capital.com
+  description: Capital.com production REST API server
+- url: https://demo-api-capital.backend-capital.com
+  description: Capital.com demo (sandbox) REST API server
+security:
+- apiKey: []
+  sessionToken: []
+  securityToken: []
+tags:
+- name: Session
+  description: Operations for creating, switching, and ending API sessions.
+paths:
+  /api/v1/session/encryptionKey:
+    get:
+      operationId: getEncryptionKey
+      summary: Get Encryption Key
+      description: Returns the public encryption key used to encrypt the session password.
+      tags:
+      - Session
+      responses:
+        '200':
+          description: Encryption key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+  /api/v1/session:
+    get:
+      operationId: getSession
+      summary: Get Session Details
+      description: Returns details of the currently active API session.
+      tags:
+      - Session
+      responses:
+        '200':
+          description: Session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSession
+      summary: Create New Session
+      description: Authenticates with API key and login credentials to create a new session.
+      tags:
+      - Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericObject'
+      responses:
+        '200':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: switchAccount
+      summary: Switch Active Account
+      description: Switches the active account associated with the current session.
+      tags:
+      - Session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericObject'
+      responses:
+        '200':
+          description: Account switched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+    delete:
+      operationId: logOutSession
+      summary: Log Out Session
+      description: Terminates the current API session.
+      tags:
+      - Session
+      responses:
+        '200':
+          description: Session terminated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+components:
+  schemas:
+    GenericObject:
+      type: object
+      description: Generic JSON object response.
+      additionalProperties: true
+    Error:
+      type: object
+      description: Generic error response.
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+      additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-CAP-API-KEY
+      description: Capital.com API key required for all calls.
+    sessionToken:
+      type: apiKey
+      in: header
+      name: CST
+      description: Client session token returned after creating a session.
+    securityToken:
+      type: apiKey
+      in: header
+      name: X-SECURITY-TOKEN
+      description: Security token returned after creating a session.
+externalDocs:
+  description: Capital.com Public API Documentation
+  url: https://open-api.capital.com
+x-generated-from: https://open-api.capital.com
+x-generated-by: claude-crawl-2026-05-08

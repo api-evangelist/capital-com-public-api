@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  title: Capital.com REST Accounts General API
+  description: The Capital.com REST API provides programmatic access to the Capital.com trading engine, including positions, working orders, deal confirmations, account information, account switching, transaction history, account preferences (leverage, hedging mode), market navigation, instruments, and historical price data. Authentication uses an API key plus login credentials to create a session that returns CST and X-SECURITY-TOKEN headers, which expire after ten minutes of inactivity.
+  version: v1
+  contact:
+    name: Capital.com API Support
+    url: https://open-api.capital.com
+servers:
+- url: https://api-capital.backend-capital.com
+  description: Capital.com production REST API server
+- url: https://demo-api-capital.backend-capital.com
+  description: Capital.com demo (sandbox) REST API server
+security:
+- apiKey: []
+  sessionToken: []
+  securityToken: []
+tags:
+- name: General
+  description: Server time, ping, and encryption-key utility endpoints.
+paths:
+  /api/v1/time:
+    get:
+      operationId: getServerTime
+      summary: Get Server Time
+      description: Returns the current Capital.com server time.
+      tags:
+      - General
+      responses:
+        '200':
+          description: Server time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+  /api/v1/ping:
+    get:
+      operationId: ping
+      summary: Ping the Service
+      description: Returns a simple OK response to verify connectivity.
+      tags:
+      - General
+      responses:
+        '200':
+          description: Service is reachable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericObject'
+components:
+  schemas:
+    GenericObject:
+      type: object
+      description: Generic JSON object response.
+      additionalProperties: true
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-CAP-API-KEY
+      description: Capital.com API key required for all calls.
+    sessionToken:
+      type: apiKey
+      in: header
+      name: CST
+      description: Client session token returned after creating a session.
+    securityToken:
+      type: apiKey
+      in: header
+      name: X-SECURITY-TOKEN
+      description: Security token returned after creating a session.
+externalDocs:
+  description: Capital.com Public API Documentation
+  url: https://open-api.capital.com
+x-generated-from: https://open-api.capital.com
+x-generated-by: claude-crawl-2026-05-08
