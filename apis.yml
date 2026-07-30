@@ -8,9 +8,22 @@ description: >-
   data. A companion WebSocket API streams real-time prices and OHLC candles for up to 40 concurrent instruments.
 type: Index
 kind: company
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/capital-com-public-api.png
 tags:
   - CFD
   - Commodities
@@ -27,80 +40,150 @@ created: '2024-12-03'
 modified: '2026-05-29'
 specificationVersion: '0.19'
 apis:
-  - aid: capital-com-public-api:capital-com-rest-api
-    name: Capital.com REST API
-    description: >-
-      The Capital.com REST API provides programmatic access to positions, working orders, deal confirmations, account
-      information, account switching, transaction history, preferences (leverage, hedging mode), market navigation,
-      instrument details, historical prices, watchlists, and client sentiment data. Authentication uses an API key plus
-      login credentials to create a session that returns CST and X-SECURITY-TOKEN headers, which expire after 10 minutes
-      of inactivity.
-    humanURL: https://open-api.capital.com
-    tags:
-      - CFD
-      - Financial
-      - Market Data
-      - Trading
-    properties:
-      - type: Documentation
-        url: https://open-api.capital.com
-      - type: Base URL
-        url: https://api-capital.backend-capital.com/
-      - type: Sandbox
-        url: https://demo-api-capital.backend-capital.com/
-      - type: Authentication
-        url: https://open-api.capital.com
-      - type: OpenAPI
-        url: openapi/capital-com-public-api-capital-com-rest-api-openapi.yml
-    x-features:
-      - Session-based authentication with CST and X-SECURITY-TOKEN
-      - API key plus login credentials to create sessions
-      - 10-minute inactivity session expiry
-      - Position management (open, update, close)
-      - Working orders (limit and stop)
-      - Deal confirmations and execution tracking
-      - Account switching across multiple accounts
-      - Transaction and activity history
-      - Leverage and hedging-mode preferences
-      - Demo account balance adjustment for testing
-      - Market navigation hierarchy
-      - Instrument details and search
-      - Historical price data (OHLC)
-      - Client sentiment data
-      - Watchlist management
-    x-use-cases:
-      - Building automated CFD trading strategies
-      - Algorithmic execution across shares, forex, commodities, indices, and crypto
-      - Copy-trading and signal-provider applications
-      - Portfolio and risk dashboards
-      - Backtesting against historical price data
-      - Sentiment-driven trading signals
-      - Demo-account integration testing before going live
-  - aid: capital-com-public-api:capital-com-websocket-api
-    name: Capital.com WebSocket API
-    description: >-
-      The Capital.com WebSocket API streams real-time market data, supporting up to 40 concurrent instruments and OHLC
-      candlestick subscriptions for low-latency trading applications.
-    humanURL: https://open-api.capital.com
-    tags:
-      - Market Data
-      - Streaming
-      - Trading
-      - WebSocket
-    properties:
-      - type: Documentation
-        url: https://open-api.capital.com
-      - type: AsyncAPI
-        url: asyncapi/capital-com-public-api-asyncapi.yml
-    x-features:
-      - Real-time price streaming via WebSocket
-      - Up to 40 concurrent instrument subscriptions
-      - OHLC candlestick streaming
-      - Low-latency market data for trading systems
-    x-use-cases:
-      - Low-latency automated trading execution
-      - Real-time market dashboards
-      - Streaming-data backtesting and replay
+- aid: capital-com-public-api:capital-com-websocket-api
+  name: Capital.com WebSocket API
+  description: >-
+    The Capital.com WebSocket API streams real-time market data, supporting up to 40 concurrent instruments
+    and OHLC candlestick subscriptions for low-latency trading applications.
+  humanURL: https://open-api.capital.com
+  tags:
+  - Market Data
+  - Streaming
+  - Trading
+  - WebSocket
+  properties:
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: AsyncAPI
+    url: asyncapi/capital-com-public-api-asyncapi.yml
+  x-features:
+  - Real-time price streaming via WebSocket
+  - Up to 40 concurrent instrument subscriptions
+  - OHLC candlestick streaming
+  - Low-latency market data for trading systems
+  x-use-cases:
+  - Low-latency automated trading execution
+  - Real-time market dashboards
+  - Streaming-data backtesting and replay
+- aid: capital-com-public-api:capital-com-public-api-accounts-api
+  name: Capital.com Public API Accounts API
+  description: Account information, preferences, and demo top-up.
+  humanURL: https://open-api.capital.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/capital-com-public-api-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: Base URL
+    url: https://api-capital.backend-capital.com/
+  - type: Sandbox
+    url: https://demo-api-capital.backend-capital.com/
+  - type: Authentication
+    url: https://open-api.capital.com
+- aid: capital-com-public-api:capital-com-public-api-general-api
+  name: Capital.com Public API General API
+  description: Server time, ping, and encryption-key utility endpoints.
+  humanURL: https://open-api.capital.com
+  tags:
+  - General
+  properties:
+  - type: OpenAPI
+    url: openapi/capital-com-public-api-general-api-openapi.yml
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: Base URL
+    url: https://api-capital.backend-capital.com/
+  - type: Sandbox
+    url: https://demo-api-capital.backend-capital.com/
+  - type: Authentication
+    url: https://open-api.capital.com
+- aid: capital-com-public-api:capital-com-public-api-history-api
+  name: Capital.com Public API History API
+  description: Account activity and transaction history.
+  humanURL: https://open-api.capital.com
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/capital-com-public-api-history-api-openapi.yml
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: Base URL
+    url: https://api-capital.backend-capital.com/
+  - type: Sandbox
+    url: https://demo-api-capital.backend-capital.com/
+  - type: Authentication
+    url: https://open-api.capital.com
+- aid: capital-com-public-api:capital-com-public-api-markets-api
+  name: Capital.com Public API Markets API
+  description: Market navigation and instrument lookup.
+  humanURL: https://open-api.capital.com
+  tags:
+  - Markets
+  properties:
+  - type: OpenAPI
+    url: openapi/capital-com-public-api-markets-api-openapi.yml
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: Base URL
+    url: https://api-capital.backend-capital.com/
+  - type: Sandbox
+    url: https://demo-api-capital.backend-capital.com/
+  - type: Authentication
+    url: https://open-api.capital.com
+- aid: capital-com-public-api:capital-com-public-api-positions-api
+  name: Capital.com Public API Positions API
+  description: Operations for opening, updating, and closing trading positions.
+  humanURL: https://open-api.capital.com
+  tags:
+  - Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/capital-com-public-api-positions-api-openapi.yml
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: Base URL
+    url: https://api-capital.backend-capital.com/
+  - type: Sandbox
+    url: https://demo-api-capital.backend-capital.com/
+  - type: Authentication
+    url: https://open-api.capital.com
+- aid: capital-com-public-api:capital-com-public-api-session-api
+  name: Capital.com Public API Session API
+  description: Operations for creating, switching, and ending API sessions.
+  humanURL: https://open-api.capital.com
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/capital-com-public-api-session-api-openapi.yml
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: Base URL
+    url: https://api-capital.backend-capital.com/
+  - type: Sandbox
+    url: https://demo-api-capital.backend-capital.com/
+  - type: Authentication
+    url: https://open-api.capital.com
+- aid: capital-com-public-api:capital-com-public-api-working-orders-api
+  name: Capital.com Public API Working Orders API
+  description: Operations for managing limit and stop working orders.
+  humanURL: https://open-api.capital.com
+  tags:
+  - Working Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/capital-com-public-api-working-orders-api-openapi.yml
+  - type: Documentation
+    url: https://open-api.capital.com
+  - type: Base URL
+    url: https://api-capital.backend-capital.com/
+  - type: Sandbox
+    url: https://demo-api-capital.backend-capital.com/
+  - type: Authentication
+    url: https://open-api.capital.com
 common:
   - type: AgenticAccess
     url: agentic-access/capital-com-public-api-agentic-access.yml
