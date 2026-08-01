@@ -1,0 +1,26 @@
+{
+  "provider": "capital-com-public-api",
+  "sources": [
+    "capital-com-public-api-accounts-api-openapi.yml",
+    "capital-com-public-api-general-api-openapi.yml",
+    "capital-com-public-api-history-api-openapi.yml",
+    "capital-com-public-api-markets-api-openapi.yml",
+    "capital-com-public-api-positions-api-openapi.yml",
+    "capital-com-public-api-session-api-openapi.yml",
+    "capital-com-public-api-working-orders-api-openapi.yml"
+  ],
+  "outputs": [
+    "capital-com-public-api-accounts-api-openapi.yml",
+    "capital-com-public-api-general-api-openapi.yml",
+    "capital-com-public-api-history-api-openapi.yml",
+    "capital-com-public-api-markets-api-openapi.yml",
+    "capital-com-public-api-positions-api-openapi.yml",
+    "capital-com-public-api-session-api-openapi.yml",
+    "capital-com-public-api-working-orders-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
