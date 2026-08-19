@@ -38,7 +38,7 @@ tags:
   - WebSocket
 created: '2024-12-03'
 modified: '2026-05-29'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: capital-com-public-api:capital-com-websocket-api
   name: Capital.com WebSocket API
