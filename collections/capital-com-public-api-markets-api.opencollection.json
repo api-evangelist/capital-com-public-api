@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Capital.com REST Accounts Markets API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CAP-API-KEY",
+      "value": "{{X-CAP-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Markets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Top-Level Market Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/marketnavigation"
+          },
+          "docs": "Returns the top-level market navigation categories."
+        },
+        {
+          "info": {
+            "name": "List Sub-Nodes for Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/marketnavigation/:nodeId",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path",
+                "description": "The navigation node identifier."
+              }
+            ]
+          },
+          "docs": "Returns the sub-nodes (markets and child categories) under a given navigation node."
+        },
+        {
+          "info": {
+            "name": "List Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/markets"
+          },
+          "docs": "Returns details for a set of markets, filtered by query parameters."
+        },
+        {
+          "info": {
+            "name": "Get Single Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/markets/:epic",
+            "params": [
+              {
+                "name": "epic",
+                "value": "",
+                "type": "path",
+                "description": "Market epic (instrument identifier)."
+              }
+            ]
+          },
+          "docs": "Returns details for a single market, identified by its epic."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

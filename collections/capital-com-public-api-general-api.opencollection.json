@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Capital.com REST Accounts General API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CAP-API-KEY",
+      "value": "{{X-CAP-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "General",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Server Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/time"
+          },
+          "docs": "Returns the current Capital.com server time."
+        },
+        {
+          "info": {
+            "name": "Ping the Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/ping"
+          },
+          "docs": "Returns a simple OK response to verify connectivity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

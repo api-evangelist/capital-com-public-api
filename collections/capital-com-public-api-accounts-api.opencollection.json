@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Capital.com REST Accounts API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CAP-API-KEY",
+      "value": "{{X-CAP-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts"
+          },
+          "docs": "Returns all accounts available to the authenticated client."
+        },
+        {
+          "info": {
+            "name": "Get Account Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts/preferences"
+          },
+          "docs": "Returns account preferences, including leverage and hedging mode."
+        },
+        {
+          "info": {
+            "name": "Update Account Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts/preferences",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates account preferences such as leverage or hedging mode."
+        },
+        {
+          "info": {
+            "name": "Adjust Demo Account Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-capital.backend-capital.com/api/v1/accounts/topUp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adjusts the balance of a demo account for testing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

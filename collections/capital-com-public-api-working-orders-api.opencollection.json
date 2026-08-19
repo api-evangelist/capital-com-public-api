@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Capital.com REST Accounts Working Orders API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CAP-API-KEY",
+      "value": "{{X-CAP-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Working Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Working Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders"
+          },
+          "docs": "Returns all working (limit/stop) orders for the active account."
+        },
+        {
+          "info": {
+            "name": "Create Working Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new working order (limit or stop)."
+        },
+        {
+          "info": {
+            "name": "Update Working Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders/:dealId",
+            "params": [
+              {
+                "name": "dealId",
+                "value": "",
+                "type": "path",
+                "description": "The deal ID for the working order."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing working order."
+        },
+        {
+          "info": {
+            "name": "Delete Working Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-capital.backend-capital.com/api/v1/workingorders/:dealId",
+            "params": [
+              {
+                "name": "dealId",
+                "value": "",
+                "type": "path",
+                "description": "The deal ID for the working order."
+              }
+            ]
+          },
+          "docs": "Cancels and deletes the specified working order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

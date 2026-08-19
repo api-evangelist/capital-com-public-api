@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Capital.com REST Accounts Session API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CAP-API-KEY",
+      "value": "{{X-CAP-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Encryption Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/session/encryptionKey"
+          },
+          "docs": "Returns the public encryption key used to encrypt the session password."
+        },
+        {
+          "info": {
+            "name": "Get Session Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-capital.backend-capital.com/api/v1/session"
+          },
+          "docs": "Returns details of the currently active API session."
+        },
+        {
+          "info": {
+            "name": "Create New Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-capital.backend-capital.com/api/v1/session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates with API key and login credentials to create a new session."
+        },
+        {
+          "info": {
+            "name": "Switch Active Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-capital.backend-capital.com/api/v1/session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Switches the active account associated with the current session."
+        },
+        {
+          "info": {
+            "name": "Log Out Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-capital.backend-capital.com/api/v1/session"
+          },
+          "docs": "Terminates the current API session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
