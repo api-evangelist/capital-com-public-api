@@ -70,6 +70,8 @@ apis:
   description: Account information, preferences, and demo top-up.
   humanURL: https://open-api.capital.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -86,7 +88,8 @@ apis:
   name: Capital.com Public API General API
   description: Server time, ping, and encryption-key utility endpoints.
   humanURL: https://open-api.capital.com
-  tags:
+  tags: []
+  tags_raw:
   - General
   properties:
   - type: OpenAPI
