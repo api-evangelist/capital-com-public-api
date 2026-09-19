@@ -45,6 +45,18 @@ tags:
   - Forex
   - Indices
   - Market Data
+  - Share
+  - Streaming
+  - Trading
+  - WebSocket
+tags_raw:
+  - CFD
+  - Commodities
+  - Cryptocurrency
+  - Financial
+  - Forex
+  - Indices
+  - Market Data
   - Shares
   - Streaming
   - Trading
@@ -171,6 +183,8 @@ apis:
   description: Operations for creating, switching, and ending API sessions.
   humanURL: https://open-api.capital.com
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
