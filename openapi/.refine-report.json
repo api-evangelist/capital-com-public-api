@@ -1,13 +1,7 @@
 {
   "provider": "capital-com-public-api",
   "sources": [
-    "capital-com-public-api-accounts-api-openapi.yml",
-    "capital-com-public-api-general-api-openapi.yml",
-    "capital-com-public-api-history-api-openapi.yml",
-    "capital-com-public-api-markets-api-openapi.yml",
-    "capital-com-public-api-positions-api-openapi.yml",
-    "capital-com-public-api-session-api-openapi.yml",
-    "capital-com-public-api-working-orders-api-openapi.yml"
+    "_ae-authored/capital-com-public-api-capital-com-rest-api-openapi.yml"
   ],
   "outputs": [
     "capital-com-public-api-accounts-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "capital-com-public-api-capital-com-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "capital-com-public-api-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "capital-com-public-api-general-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "capital-com-public-api-history-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "capital-com-public-api-markets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "capital-com-public-api-positions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "capital-com-public-api-session-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "capital-com-public-api-working-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
