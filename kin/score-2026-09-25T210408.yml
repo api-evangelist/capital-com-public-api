@@ -1,21 +1,19 @@
-# Kin Score artifact — capital-com-public-api — 2026-09-02T211804
+# Kin Score artifact — capital-com-public-api — 2026-09-25T210408
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: capital-com-public-api
-  schema_version: 0.18.0
-  scored_at: '2026-09-02'
-  run_ts: 2026-09-02T211804
-  composite: 34.1
+  schema_version: 0.23.0
+  scored_at: '2026-09-25'
+  run_ts: 2026-09-25T210408
+  composite: 31.5
   band: thin
   facets:
-    discoverability: 64.8
-    contract_quality: 63.1
-    governance: 13.6
+    discoverability: 62.5
+    contract_quality: 58.3
+    contract_governance: 13.6
     operational_transparency: 10.5
     developer_ergonomics: 25.0
-    commercial_clarity: 15.8
-    contract_governance: 13.6
     access_clarity: 15.8
   agent_readiness:
     score: 20.9
@@ -44,7 +42,7 @@ kin_score:
     applies: true
     regime: Securities & Market Data
     regime_id: securities_market_data
-    score: 40.0
+    score: 22.2
     matched_via: tags
   provenance:
     agentic_access: derived
