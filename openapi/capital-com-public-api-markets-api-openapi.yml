@@ -92,18 +92,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    GenericObject:
-      type: object
-      description: Generic JSON object response.
-      additionalProperties: true
     Error:
       type: object
       description: Generic error response.
@@ -113,6 +102,17 @@ components:
         message:
           type: string
       additionalProperties: true
+    GenericObject:
+      type: object
+      description: Generic JSON object response.
+      additionalProperties: true
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKey:
       type: apiKey

@@ -104,10 +104,6 @@ paths:
                 $ref: '#/components/schemas/GenericObject'
 components:
   schemas:
-    GenericObject:
-      type: object
-      description: Generic JSON object response.
-      additionalProperties: true
     Error:
       type: object
       description: Generic error response.
@@ -116,6 +112,10 @@ components:
           type: string
         message:
           type: string
+      additionalProperties: true
+    GenericObject:
+      type: object
+      description: Generic JSON object response.
       additionalProperties: true
   responses:
     Unauthorized:
