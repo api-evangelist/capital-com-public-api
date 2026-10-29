@@ -1,4 +1,4 @@
-# Capital.com Public API (capital-com-public-api)
+# Capital.com Public API
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,91 +66,151 @@
 
 Capital.com is a European trading platform offering CFDs across shares, indices, commodities, forex, and cryptocurrencies. The Capital.com Public API provides direct access to the trading engine for automated strategies, giving programmatic control of positions, working orders, account preferences, and historical and streaming market data. A companion WebSocket API streams real-time prices and OHLC candles for up to 40 concurrent instruments.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/capital-com-public-api/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/capital-com-public-api/refs/heads/main/apis.yml)
+**Areas:** CFD · Commodities · Cryptocurrency · Finance · Foreign Exchange · Indices · Market Data · Share · Streaming · Trading · WebSocket · Real-Time
 
-## Scope
+## Capital.com Public API on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Capital.com Public API is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/capital-com-public-api/](https://apis.io/providers/capital-com-public-api/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (8)
 
-- CFD
-- Commodities
-- Cryptocurrency
-- Financial
-- Forex
-- Indices
-- Market Data
-- Shares
-- Streaming
-- Trading
-- WebSocket
+- [Capital.com WebSocket API](https://apis.io/apis/capital-com-public-api/capital-com-websocket-api/) — The Capital.com WebSocket API streams real-time market data, supporting up to 40 concurrent instruments and OHLC candlestick subscriptions for low-latency…
+- [Capital.com Public API Accounts API](https://apis.io/apis/capital-com-public-api/capital-com-public-api-accounts-api/) — Account information, preferences, and demo top-up.
+- [Capital.com Public API General API](https://apis.io/apis/capital-com-public-api/capital-com-public-api-general-api/) — Server time, ping, and encryption-key utility endpoints.
+- [Capital.com Public API History API](https://apis.io/apis/capital-com-public-api/capital-com-public-api-history-api/) — Account activity and transaction history.
+- [Capital.com Public API Markets API](https://apis.io/apis/capital-com-public-api/capital-com-public-api-markets-api/) — Market navigation and instrument lookup.
+- [Capital.com Public API Positions API](https://apis.io/apis/capital-com-public-api/capital-com-public-api-positions-api/) — Operations for opening, updating, and closing trading positions.
+- [Capital.com Public API Session API](https://apis.io/apis/capital-com-public-api/capital-com-public-api-session-api/) — Operations for creating, switching, and ending API sessions.
+- [Capital.com Public API Working Orders API](https://apis.io/apis/capital-com-public-api/capital-com-public-api-working-orders-api/) — Operations for managing limit and stop working orders.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-12-03
-- **Modified:** 2026-05-29
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Capital.com REST API
+Event-driven and webhook contracts.
 
-The Capital.com REST API provides programmatic access to positions, working orders, deal confirmations, account information, account switching, transaction history, preferences (leverage, hedging mode), market navigation, instrument details, historical prices, watchlists, and client sentiment data. Authentication uses an API key plus login credentials to create a session that returns CST and X-SECURITY-TOKEN headers, which expire after 10 minutes of inactivity.
+- [Capital.com WebSocket Streaming API](https://apis.io/asyncapis/capital-com-public-api/capital-com-public-api-asyncapi/)
 
-- **Human URL:** [https://open-api.capital.com](https://open-api.capital.com)
+#### Event channels (1)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- CFD
-- Financial
-- Market Data
-- Trading
+- [/](https://apis.io/channels/capital-com-public-api/untitled/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://open-api.capital.com)
-- [Base  U R L](https://api-capital.backend-capital.com/)
-- [Sandbox](https://demo-api-capital.backend-capital.com/)
-- [Authentication](https://open-api.capital.com)
-- [OpenAPI](openapi/capital-com-public-api-capital-com-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/capital-com-public-api-capital-com-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/capital-com-public-api-capital-com-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Capital.com WebSocket API
+- [Capital Com Public Api Agentic Access](https://apis.io/agentic-access/capital-com-public-api/capital-com-public-api-agentic-access/)
 
-The Capital.com WebSocket API streams real-time market data, supporting up to 40 concurrent instruments and OHLC candlestick subscriptions for low-latency trading applications.
+#### Collections (8)
 
-- **Human URL:** [https://open-api.capital.com](https://open-api.capital.com)
+Postman and Open Collection request collections.
 
-#### Tags
+- [Capital.com REST Accounts API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-accounts-api/)
+- [Capital.com REST API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-capital-com-rest-api/)
+- [Capital.com REST Accounts General API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-general-api/)
+- [Capital.com REST Accounts History API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-history-api/)
+- [Capital.com REST Accounts Markets API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-markets-api/)
+- [Capital.com REST Accounts Positions API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-positions-api/)
+- [Capital.com REST Accounts Session API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-session-api/)
+- [Capital.com REST Accounts Working Orders API](https://apis.io/collections/capital-com-public-api/open-capital-com-public-api-working-orders-api/)
 
-- Market Data
-- Streaming
-- Trading
-- WebSocket
+#### Governance rules (1)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://open-api.capital.com)
-- [AsyncAPI](asyncapi/capital-com-public-api-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/capital-com-public-api-capital-com-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/capital-com-public-api-capital-com-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Capital.com Public API — asyncapi rules](https://apis.io/rules/capital-com-public-api/capital-com-public-api-asyncapi-spectral-rules/)
 
-## Common Properties
+#### Security (3)
 
-- [GitHub Organization](https://github.com/capital-com-sv)
-- [LinkedIn](https://www.linkedin.com/company/capitalcom)
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Capital Com Public Api Authentication](https://apis.io/security/capital-com-public-api/capital-com-public-api-authentication/)
+- [Capital Com Public Api Domain Security](https://apis.io/security/capital-com-public-api/capital-com-public-api-domain-security/)
+- [Capital Com Public Api Vulnerability Disclosure](https://apis.io/security/capital-com-public-api/capital-com-public-api-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Capital Com Public Api Plans Pricing](https://apis.io/plans/capital-com-public-api/capital-com-public-api-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Capital Com Public Api Rate Limits](https://apis.io/rate-limits/capital-com-public-api/capital-com-public-api-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Capital Com Public Api Finops](https://apis.io/finops/capital-com-public-api/capital-com-public-api-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://capital.com/)
 - [Documentation](https://open-api.capital.com)
-- [Sandbox](https://demo-api-capital.backend-capital.com/)
-- [Privacy Policy](https://capital.com/privacy-policy)
-- [Terms of Service](https://capital.com/terms-and-conditions)
 - [Support](https://capital.com/help)
 - [Blog](https://capital.com/news-and-analysis)
+- [Terms of service](https://capital.com/terms-and-conditions)
+- [Privacy policy](https://capital.com/privacy-policy)
+- [GitHub](https://github.com/capital-com-sv)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 58.3 |
+| Contract governance | 13.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 25.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.2** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/capital-com-public-api/](https://apis.io/providers/capital-com-public-api/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Capital.com Public API: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/capital-com-public-api/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
